@@ -16,42 +16,71 @@
         if (isset($_POST['login'])) {
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $adminid = "admin@gmail.com";
+            $adminPassword = "admin@123";
 
             include "conn.php";
             $creds = "Select password from users where email = '$email'";
             $result = mysqli_query($conn,$creds);
             $row = mysqli_fetch_assoc($result);
             //var_dump($row);
-            if ($row['password'] == $password) {
-                session_start();
-                $_SESSION['email'] = $email;
-                header("location: dashboard.php");
-            }else {
-                header("location: index.php");
+            if ($password == $adminPassword && $email == $adminid) {
+                $_SESSION['adminId'] = $email;
+                header("location:adminPanel.php");
+            } else {
+                
+                if ($row['password'] == $password) {
+                    session_start();
+                    $_SESSION['email'] = $email;
+                    header("location: dashboard.php");
+                }else {
+                    header("location: index.php");
+                }
             }
+            
 
         }  
 
     ?>
-    <div class="container">
-        <form action="index.php" method="POST">
-        
-            <div class="form-group">
-            <label for="">Email:</label>
-            <input type="email" class="form-control" name="email" id="" placeholder="Enter Email">
-            </div>
-            <div class="form-group">
-            <label for="">Password:</label>
-            <input type="password" class="form-control" name="password" id="" placeholder="Enter Password">
-            </div>
-            <input type="submit" name="login" value="Login" class="btn btn-success">        
-        
-        </form>
-        <a href="register.php">
-            <button class="btn btn-danger">Register</button>
-        </a>
 
-    </div>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <li class="nav-item navbar-brand">
+                <a class="navbar-brand" href="#">!Amazon</a>
+            </li>
+            <ul class="navbar-nav">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="register.php">Register</a>
+                </li>
+            </ul>
+            <!-- <li class="navbar-nav ml-auto">
+                
+                <a class="nav-link" href="logout.php">
+                    <span class="material-icons">login</span>    
+                    
+                </a>
+            </li> -->
+                
+        </nav>
+        <div class="container">
+            <form action="index.php" method="POST">
+            
+                <div class="form-group">
+                <label for="">Email:</label>
+                <input type="email" class="form-control" name="email" id="" placeholder="Enter Email">
+                </div>
+                <div class="form-group">
+                <label for="">Password:</label>
+                <input type="password" class="form-control" name="password" id="" placeholder="Enter Password">
+                </div>
+                <input type="submit" name="login" value="Login" class="btn btn-success">        
+            
+            </form>
+            <!-- <a href="register.php">
+                <button class="btn btn-danger">Register</button>
+            </a> -->
+
+        </div>
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

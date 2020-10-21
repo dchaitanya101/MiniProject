@@ -45,7 +45,25 @@
 
     ?>
 
-
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <li class="nav-item navbar-brand">
+                <a class="navbar-brand" href="#">!Amazon</a>
+            </li>
+            <ul class="navbar-nav">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Login</a>
+                </li>
+            </ul>
+            <!-- <li class="navbar-nav ml-auto">
+                
+                <a class="nav-link" href="logout.php">
+                    <span class="material-icons">login</span>    
+                    
+                </a>
+            </li> -->
+                
+    </nav>
       <div class="container">
 
           <form action="register.php" method="post">
@@ -72,9 +90,9 @@
               <input type="submit" name="register" value="Register" class="btn btn-success">
               
           </form>
-          <a href="index.php">
+          <!-- <a href="index.php">
                   <button class="btn btn-primary">LogIn</button>
-          </a>
+          </a> -->
 
       </div>
     <!-- Optional JavaScript -->

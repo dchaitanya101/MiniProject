@@ -7,7 +7,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>!Amazon</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,8 +36,58 @@
             </li>
                 
         </nav>
+        <?php
+                    include "conn.php";
+                    $orderDetails = "select orders.order_id, orders.product_name, orders.product_price, orders.product_quantity, orders.order_status FROM orders inner join users on orders.customer_id = users.id";
+                    $result = mysqli_query($conn,$orderDetails);
+                    //$orderDetailsAssoc = mysqli_fetch_assoc($rawData);
+                    //var_dump($orderDetailsAssoc);
+                    
+                    if (mysqli_num_rows($result) == 0) {
+                        echo "No Orders yet";
+                    }else {
+                       
+                   
+        ?>
+        <div class="container table-responsive-md">
 
-        
+            <table class="table">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>Product Quantity</th>
+                        <th>Order Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+    
+                        <?php
+                            while ($row = mysqli_fetch_assoc($result)) {
+                        
+                        ?>
+                        <tr>
+                            <td><?php echo $row['order_id']; ?></td>
+                            <td><?php echo $row['product_name']; ?></td>
+                            <td><?php echo $row['product_price']; ?></td>
+                            <td><?php echo $row['product_quantity']; ?></td>
+                            <td><?php echo $row['order_status']; ?></td>
+                            
+                        </tr>
+    
+    
+                    <?php
+                            }
+                    ?>
+                        
+                    </tbody>
+            </table>
+
+        </div>
+        <?php
+                    }
+        ?>
 
       
     <!-- Optional JavaScript -->

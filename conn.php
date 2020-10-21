@@ -3,9 +3,9 @@
     $servername = "localhost";
     $dbname = "customermgmt";
     $user = "root";
-    $password = "admin123";
+    $SQLpassword = "admin123";
 
-    $conn = new mysqli($servername, $user, $password, $dbname);
+    $conn = new mysqli($servername, $user, $SQLpassword, $dbname);
 
     
 

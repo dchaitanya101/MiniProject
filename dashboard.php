@@ -1,7 +1,13 @@
 <?php
         session_start();
         if (isset($_SESSION['email'])) {
-      
+            $sessionMail = $_SESSION['email'];
+            include "conn.php";
+            $fetchIdquery = "select id from users where email = '$sessionMail'";
+            $fetchIdRaw = mysqli_query($conn,$fetchIdquery);
+            $row = mysqli_fetch_assoc($fetchIdRaw);
+            $rowId = $row['id'];
+            $_SESSION['userId'] = $rowId;
 ?>
 
 <!doctype html>
@@ -25,10 +31,35 @@
                 $product_quantity = $_POST['product_quantity'];
                 $payment_mode = $_POST['payment_mode'];
 
-                if ($product) {
+                if ($product_name == "") {
+                    header("location:dashboard.php");
                     
                 } else {
-                    
+                    if ($product_desc == "") {
+                        header("location:dashboard.php");
+                        
+                    } else {
+                        if ($product_price == "") {
+                            header("location:dashboard.php");
+                            
+                        } else {
+                            if ($product_quantity == "") {
+                                header("location:dashboard.php");
+                                
+                            } else {
+                                if ($payment_mode == "") {
+                                    header("location:dashboard.php");
+                                    
+                                } else {
+                                    include "conn.php";
+                                    
+                                    $orderQuery = "Insert into orders(customer_id, product_name, product_desc, product_price, product_quantity, payment_mode) values('$rowId','$product_name','$product_desc','$product_price','$product_quantity','$payment_mode')";
+                                    mysqli_query($conn,$orderQuery);
+                                    echo "Order Placed";
+                                }
+                            }
+                        }
+                    }
                 }
                 
 
