@@ -20,18 +20,22 @@
             $adminPassword = "admin@123";
 
             include "conn.php";
-            $creds = "Select password from users where email = '$email'";
+            $creds = "Select * from users where email = '$email'";
             $result = mysqli_query($conn,$creds);
             $row = mysqli_fetch_assoc($result);
             //var_dump($row);
             if ($password == $adminPassword && $email == $adminid) {
-                $_SESSION['adminId'] = $email;
+                session_start();
+                $_SESSION['adminID'] = $adminid;
+
+                //echo $_SESSION['adminId'];
                 header("location:adminPanel.php");
             } else {
                 
                 if ($row['password'] == $password) {
                     session_start();
                     $_SESSION['email'] = $email;
+                    $_SESSION['user_id'] = $row['id'];
                     header("location: dashboard.php");
                 }else {
                     header("location: index.php");

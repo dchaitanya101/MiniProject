@@ -1,7 +1,7 @@
 <?php
         session_start();
         if (isset($_SESSION['email'])) {
-      
+            $uid = $_SESSION['user_id'];
 ?>
 
 <!doctype html>
@@ -38,7 +38,7 @@
         </nav>
         <?php
                     include "conn.php";
-                    $orderDetails = "select orders.order_id, orders.product_name, orders.product_price, orders.product_quantity, orders.order_status FROM orders inner join users on orders.customer_id = users.id";
+                    $orderDetails = "select orders.order_id, orders.product_name, orders.product_price, orders.product_quantity, orders.order_status FROM orders inner join users on orders.customer_id = users.id where users.id = '$uid' ";
                     $result = mysqli_query($conn,$orderDetails);
                     //$orderDetailsAssoc = mysqli_fetch_assoc($rawData);
                     //var_dump($orderDetailsAssoc);

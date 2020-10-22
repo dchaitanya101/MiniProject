@@ -1,6 +1,6 @@
 <?php
-    // session_start();
-    // if (isset($_SESSION['adminId'])) {
+    session_start();
+    if (isset($_SESSION['adminID'])) {
         
     
 
@@ -150,7 +150,7 @@
 </html>
 
 <?php
-    // }else {
-    //     header("location:index.php");
-    // }
+    }else {
+        header("location:index.php");
+    }
 ?>
